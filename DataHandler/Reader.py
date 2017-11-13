@@ -35,3 +35,11 @@ def read_k1(file_path):
 
     with open(file_path, 'r') as fin:
         return list(map(int, re.split('[ \n\t]+', fin.read().strip())))
+
+def read_k2(file_path):
+    """
+    Read k2 string from file and convert to integer list
+    """
+
+    with open(file_path, 'r') as fin:
+        return list(map(int, re.split('[ \n\t]+', fin.read().strip())))

@@ -4,7 +4,7 @@ Testing module
 
 import unittest
 import IncludeProject
-from DataHandler.Reader import read_matrix_file, list_to_matrix, read_k1
+from DataHandler.Reader import read_matrix_file, list_to_matrix, read_k1, read_k2
 
 DATA_PATH = '/home/tikhon/Documents/Biometric-AccessCode/Tests/Data/'
 
@@ -24,6 +24,9 @@ class TestReader(unittest.TestCase):
 
     def test_read_k1(self):
         self.assertEqual(read_k1(DATA_PATH + 'input_k1.txt'), [1, -1, -1, 1, 1])
+
+    def test_read_k2(self):
+        self.assertEqual(read_k2(DATA_PATH + 'input_k2.txt'), [1, 0, 0, 1, 1])
 
 if __name__ == '__main__':
     unittest.main()
