@@ -16,6 +16,11 @@ class TestReader(unittest.TestCase):
         input_list = read_file(DATA_PATH + 'input.txt')
         self.assertEqual(list_to_matrix(input_list, 2, 2), [[1.1, 2.12], [3.123, 4.1234]])
 
+    def test_list_to_matrix_exc(self):
+        input_list = read_file(DATA_PATH + 'input.txt')
+        list_len = len(input_list)
+        self.assertRaises(IndexError, list_to_matrix, input_list, list_len, list_len)
+
 if __name__ == '__main__':
     unittest.main()
         
