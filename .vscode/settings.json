@@ -6,5 +6,9 @@
         "-p",
         "*_test.py"
     ],
-    "python.unitTest.unittestEnabled": true
+    "python.pythonPath": "${workspaceRoot}/venv/bin/python",
+    "python.unitTest.pyTestArgs": [
+        "Tests"
+    ],
+    "python.unitTest.pyTestEnabled": true
 }
