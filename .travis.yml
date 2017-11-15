@@ -1,7 +1,17 @@
+env:
+  global:
+    - CC_TEST_REPORTER_ID=3f737335ba2f45c63c4f0507dad27c154659f94c1afafca36f5b20512b273e41
 language: python
 python:
   - "3.5"
 install:
   - pip install -r requirements.txt
+before_script:
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
 script:
   - py.test
+  - py.test --cov-report xml --cov=DataHandler Tests/
+after_script:
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
