@@ -2,11 +2,12 @@
 Testing module
 """
 
+import os
 import pytest
 import IncludeProject
 from DataHandler.Reader import read_matrix_file, list_to_matrix, read_k1, read_k2
 
-DATA_PATH = '/home/tikhon/Documents/Biometric-AccessCode/Tests/Data/'
+DATA_PATH = os.path.dirname(os.path.realpath(__file__)) + os.sep + 'Data' + os.sep
 
 class TestReader:
     def setup_class(self):
