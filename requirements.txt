@@ -2,3 +2,5 @@ coverage
 pytest==3.2.4
 pytest-cov==2.5.1
 pylint==1.7.4
+Cython==0.24
+kivy==1.10.0
