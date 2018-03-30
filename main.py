@@ -1,6 +1,13 @@
 """
 Main module
 """
+import sys
+from PyQt5.QtWidgets import QApplication, QMainWindow
+from GUI.App import MainWindow
 
 if __name__ == '__main__':
-    print('Main module')
+    app = QApplication(sys.argv)
+    window = QMainWindow()
+    ui = MainWindow(window)
+    window.show()
+    sys.exit(app.exec_())
