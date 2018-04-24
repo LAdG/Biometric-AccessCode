@@ -14,19 +14,199 @@
    <string>Biometric-AccessCode</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="hello_btn">
-    <property name="geometry">
-     <rect>
-      <x>320</x>
-      <y>210</y>
-      <width>161</width>
-      <height>71</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Hello</string>
-    </property>
-   </widget>
+   <layout class="QVBoxLayout" name="verticalLayout_2">
+    <item>
+     <widget class="QGroupBox" name="learn_box">
+      <property name="title">
+       <string>Learn neural network</string>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <item>
+        <layout class="QHBoxLayout" name="k1_layout">
+         <item>
+          <widget class="QLabel" name="k1_label">
+           <property name="text">
+            <string>k1</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="k1_status_label">
+           <property name="text">
+            <string>-</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="k1_load_btn">
+           <property name="text">
+            <string>Load</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="k1_gen_btn">
+           <property name="text">
+            <string>Generate</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="k2_layout">
+         <item>
+          <widget class="QLabel" name="k2_label">
+           <property name="text">
+            <string>k2</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="k2_status_label">
+           <property name="text">
+            <string>-</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="k2_load_btn">
+           <property name="text">
+            <string>Load</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="k2_gen_btn">
+           <property name="text">
+            <string>Generate</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="ours_layout">
+         <item>
+          <widget class="QLabel" name="ours_label">
+           <property name="text">
+            <string>Ours</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="ours_status_label">
+           <property name="text">
+            <string>-</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="ours_load_btn">
+           <property name="text">
+            <string>Load</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="aliens_layout">
+         <item>
+          <widget class="QLabel" name="aliens_label">
+           <property name="text">
+            <string>Aliens</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="aliens_status_label">
+           <property name="text">
+            <string>-</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="aliens_load_btn">
+           <property name="text">
+            <string>Load</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <widget class="QGroupBox" name="load_box">
+      <property name="title">
+       <string>Load neural network</string>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_4">
+       <item>
+        <layout class="QHBoxLayout" name="network_layout">
+         <item>
+          <widget class="QLabel" name="network_label">
+           <property name="text">
+            <string>Network</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="network_status_label">
+           <property name="text">
+            <string>-</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="network_load_btn">
+           <property name="text">
+            <string>Load</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <widget class="QGroupBox" name="test_box">
+      <property name="title">
+       <string>Test neural network</string>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_5">
+       <item>
+        <layout class="QHBoxLayout" name="testdata_layout">
+         <item>
+          <widget class="QLabel" name="testdata_label">
+           <property name="text">
+            <string>Test data</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="testdata_status_label">
+           <property name="text">
+            <string>-</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="testdata_load_btn">
+           <property name="text">
+            <string>Load</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+    </item>
+   </layout>
   </widget>
  </widget>
  <resources/>

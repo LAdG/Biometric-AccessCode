@@ -6,5 +6,4 @@ class MainWindow(MainWindowSlots):
         self.connect_slots()
 
     def connect_slots(self):
-        self.hello_btn.clicked.connect(self.set_btn_text)
-        return None
+        pass
