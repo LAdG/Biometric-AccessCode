@@ -6,4 +6,8 @@ class MainWindow(MainWindowSlots):
         self.connect_slots()
 
     def connect_slots(self):
-        pass
+        self.k1_load_btn.clicked.connect(self.k1_load)
+        self.k2_load_btn.clicked.connect(self.k2_load)
+        self.ours_load_btn.clicked.connect(self.ours_load)
+        self.aliens_load_btn.clicked.connect(self.aliens_load)
+        self.learn_btn.clicked.connect(self.learn_network)
