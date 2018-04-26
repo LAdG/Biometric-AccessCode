@@ -22,6 +22,81 @@
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
+        <widget class="QGroupBox" name="config_box">
+         <property name="title">
+          <string>Neural network config</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_8">
+          <item>
+           <layout class="QHBoxLayout" name="count_neurons_label_layout">
+            <item>
+             <widget class="QLabel" name="count_neurons_l1_label">
+              <property name="text">
+               <string>Count neurons in layer #1</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="count_neurons_l2_label">
+              <property name="text">
+               <string>Count  neurons in layer #2</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="count_neurons_layout">
+            <item>
+             <widget class="QSpinBox" name="count_neurons_l1_spinbox"/>
+            </item>
+            <item>
+             <widget class="QSpinBox" name="count_neurons_l2_spinbox"/>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="neurons_input_config_label_layout">
+            <item>
+             <widget class="QLabel" name="neuron_l1_count_inputs_label">
+              <property name="text">
+               <string>Count neuron inputs in layer #1</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="neuron_l1_count_input_components_label">
+              <property name="text">
+               <string>Count neron input components in layer #1</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="neuron_l2_count_inputs_label">
+              <property name="text">
+               <string>Count neuron inputs in layer #2</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="neurons_input_config_layout">
+            <item>
+             <widget class="QSpinBox" name="neuron_l1_count_inputs_spinbox"/>
+            </item>
+            <item>
+             <widget class="QSpinBox" name="neuron_l1_count_input_components_spinbox"/>
+            </item>
+            <item>
+             <widget class="QSpinBox" name="neuron_l2_count_inputs_spinbox"/>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
         <layout class="QHBoxLayout" name="k1_layout">
          <item>
           <widget class="QLabel" name="k1_label">
@@ -134,6 +209,13 @@
           </widget>
          </item>
         </layout>
+       </item>
+       <item>
+        <widget class="QPushButton" name="learn_btn">
+         <property name="text">
+          <string>Learn</string>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>
