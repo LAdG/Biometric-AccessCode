@@ -4,20 +4,32 @@ Module for reading input files
 
 import re
 
-def read_matrix_file(file_path):
-    """Read file and convert to float list
+def read_matrix_files(files_path, n_el, m_com):
+    """Read files and convert to list of float matrixes
+    
+    """
+
+    return [read_matrix_file(f_path, n_el, m_com) for f_path in files_path]
+
+def read_matrix_file(file_path, n_el, m_com):
+    """Read file and convert to float matrix[n, m]
 
     :param file_path: Path to file
     :type file_path: str
-    :returns: list of float
+    :param n_el: Rows number
+    :type n_el: int
+    :param m_com: Columns number
+    :type m_com: int
+    :returns: list of lists of float
     """
 
     with open(file_path, 'r') as fin:
-        return list(map(float, re.split('[ \n\t]+', fin.read().strip())))
+        data = list(map(float, re.split('[ \n\t]+', fin.read().strip())))
+        return list_to_matrix(data, n_el, m_com)
 
 
 def list_to_matrix(input_data, n_el, m_com):
-    """Convert list to Matrix[n, m]
+    """Convert list to float matrix[n, m]
 
     :param input_data: List of data
     :type input_data: list
