@@ -1,8 +1,20 @@
 from .Slots import MainWindowSlots
 
+MAX_NEURONS = 1000
+MAX_INPUTS = 1000
+MAX_COMPONENTS = 1000
+
 class MainWindow(MainWindowSlots):
     def __init__(self, form):
         self.setupUi(form)
+
+        self.count_neurons_l1_spinbox.setMaximum(MAX_NEURONS)
+        self.count_neurons_l2_spinbox.setMaximum(MAX_NEURONS)
+
+        self.neuron_l1_count_inputs_spinbox.setMaximum(MAX_INPUTS)
+        self.neuron_l1_count_input_components_spinbox.setMaximum(MAX_COMPONENTS)
+        self.neuron_l2_count_inputs_spinbox.setMaximum(MAX_INPUTS)
+
         self.connect_slots()
 
     def connect_slots(self):
