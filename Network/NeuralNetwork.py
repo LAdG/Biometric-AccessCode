@@ -5,7 +5,7 @@ Module neural network
 import numpy as np
 import functools
 from scipy.optimize import linprog
-import Neuron
+import Network.Neuron as Neuron
 
 class NeuralNetwork():
     def __init__(self, w = None, mu = None, W = None, main_channels = [1, 2, 3, 4], h = 16, g = 256,
@@ -201,7 +201,7 @@ class NeuralNetwork():
     def __generate_in2(self):
         return self.__generate_in(self.n2, self.g, self.n1)
 
-    def __get_res_layer1(self, m, in1)
+    def __get_res_layer1(self, m, in1):
         v = [0] * self.h
 
         for i in range(self.h):

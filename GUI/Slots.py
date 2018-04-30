@@ -1,6 +1,7 @@
 from PyQt5.QtWidgets import QFileDialog
 from .UI.ui_main import Ui_MainWindow
 import DataHandler.Reader as FileReader
+import DataHandler.Generator as Generator
 import Network.NeuralNetwork as nn
 
 class MainWindowSlots(Ui_MainWindow):
@@ -19,8 +20,14 @@ class MainWindowSlots(Ui_MainWindow):
     def k1_load(self):
         self.k1 = self.__k_load(FileReader.read_k1)
 
+    def k1_gen(self):
+        self.k1 = Generator.generate_k1(320)
+
     def k2_load(self):
         self.k2 = self.__k_load(FileReader.read_k2)
+
+    def k2_gen(self):
+        self.k2 = Generator.generate_k2(256)
 
     def ours_load(self):
         self.ours_paths = self.__openFileNamesDialog("Matlab files (*.mat)")
@@ -39,7 +46,7 @@ class MainWindowSlots(Ui_MainWindow):
         self.ours = FileReader.read_matrix_files(self.ours_path, count_inputs_n1, count_component_input_n1)
         self.aliens = FileReader.read_matrix_files(self.aliens_path,  count_inputs_n1, count_component_input_n1)
 
-        self.network = new nn.NeuralNetwork(h=count_inputs_n1, g=count_inputs_n2, 
+        self.network = nn.NeuralNetwork(h=count_inputs_n1, g=count_inputs_n2, 
             components=count_component_input_n1, n1=count_neurons1, n2=count_neurons2)
 
     def __k_load(self, reader):
