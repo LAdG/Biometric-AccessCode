@@ -30,10 +30,10 @@ class MainWindowSlots(Ui_MainWindow):
         self.k2 = Generator.generate_k2(256)
 
     def ours_load(self):
-        self.ours_paths = self.__openFileNamesDialog("Matlab files (*.mat)")
+        self.ours_paths = self.__openFileNamesDialog("Ours files (*.txt)")
 
     def aliens_load(self):
-        self.aliens_paths = self.__openFileNamesDialog("Matlab files (*.mat)")
+        self.aliens_paths = self.__openFileNamesDialog("Aliens files (*.txt)")
 
     def learn_network(self):
         count_neurons1 = self.count_neurons_l1_spinbox.value()
