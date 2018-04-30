@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QFileDialog
+from PyQt5.QtWidgets import QFileDialog, QMessageBox
 from .UI.ui_main import Ui_MainWindow
 import DataHandler.Reader as FileReader
 import DataHandler.Generator as Generator
@@ -48,6 +48,22 @@ class MainWindowSlots(Ui_MainWindow):
 
         self.network = nn.NeuralNetwork(h=count_inputs_n1, g=count_inputs_n2, 
             components=count_component_input_n1, n1=count_neurons1, n2=count_neurons2)
+
+        QMessageBox.about(None, "Learn neural network", "Done!")
+
+    def test_network(self):
+        n_el = self.neuron_l1_count_inputs_spinbox.value()
+        m_com = self.neuron_l1_count_input_components_spinbox.value()
+        form_file = self.__openFileNameDialog("Test form file (*.txt)")
+        form = FileReader.read_matrix_file(form_file, n_el, m_com)
+
+        res_key = self.network.get_key(form)
+        diff = 0
+        for i in range(len(res_key)):
+            diff += 1 if res_key[i] != self.k2 else 0
+
+        QMessageBox.about(None, "Test neural network", "Done! Diff: " + str(diff))
+
 
     def __k_load(self, reader):
         k_path = self.__openFileNameDialog("Key file (*.txt)")

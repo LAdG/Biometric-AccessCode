@@ -35,3 +35,5 @@ class MainWindow(MainWindowSlots):
         self.ours_load_btn.clicked.connect(self.ours_load)
         self.aliens_load_btn.clicked.connect(self.aliens_load)
         self.learn_btn.clicked.connect(self.learn_network)
+
+        self.testdata_load_btn.clicked.connect(self.test_network)
