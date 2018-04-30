@@ -43,8 +43,8 @@ class MainWindowSlots(Ui_MainWindow):
         count_component_input_n1 = self.neuron_l1_count_input_components_spinbox.value()
         count_inputs_n2 = self.neuron_l2_count_inputs_spinbox.value()
 
-        self.ours = FileReader.read_matrix_files(self.ours_path, count_inputs_n1, count_component_input_n1)
-        self.aliens = FileReader.read_matrix_files(self.aliens_path,  count_inputs_n1, count_component_input_n1)
+        self.ours = FileReader.read_matrix_files(self.ours_paths, count_inputs_n1, count_component_input_n1)
+        self.aliens = FileReader.read_matrix_files(self.aliens_paths,  count_inputs_n1, count_component_input_n1)
 
         self.network = nn.NeuralNetwork(h=count_inputs_n1, g=count_inputs_n2, 
             components=count_component_input_n1, n1=count_neurons1, n2=count_neurons2)
