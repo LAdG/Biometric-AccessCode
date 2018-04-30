@@ -8,7 +8,8 @@ from scipy.optimize import linprog
 import Neuron
 
 class NeuralNetwork():
-    def __init__(self, w = None, mu = None, W = None, main_channels = None, h, g):
+    def __init__(self, w = None, mu = None, W = None, main_channels = [1, 2, 3, 4], h = 16, g = 256,
+                 components = 16, n1 = 320, n2 = 256):
         """Initialize neural network
 
         :param w1: Matrix of weights layer 1
@@ -34,14 +35,14 @@ class NeuralNetwork():
         self.g = g
 
         # count electrodes
-        self.I = None
+        self.I = h
         # count components
         self.J = None
 
         # count neurons in layer 1
-        self.n1 = 320
+        self.n1 = n1
         # count neurons in layer 2
-        self.n2 = 256
+        self.n2 = n2
 
     # public
 
