@@ -19,21 +19,27 @@ class MainWindowSlots(Ui_MainWindow):
 
     def k1_load(self):
         self.k1 = self.__k_load(FileReader.read_k1)
+        self.k1_status_label.setText('+')
 
     def k1_gen(self):
         self.k1 = Generator.generate_k1(320)
+        self.k1_status_label.setText('+')
 
     def k2_load(self):
         self.k2 = self.__k_load(FileReader.read_k2)
+        self.k2_status_label.setText('+')
 
     def k2_gen(self):
         self.k2 = Generator.generate_k2(256)
+        self.k2_status_label.setText('+')
 
     def ours_load(self):
         self.ours_paths = self.__openFileNamesDialog("Ours files (*.txt)")
+        self.ours_status_label.setText('+')
 
     def aliens_load(self):
         self.aliens_paths = self.__openFileNamesDialog("Aliens files (*.txt)")
+        self.aliens_status_label.setText('+')
 
     def learn_network(self):
         count_neurons1 = self.count_neurons_l1_spinbox.value()
