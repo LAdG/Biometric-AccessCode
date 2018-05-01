@@ -1,4 +1,5 @@
 import json
+import numpy as np
 from PyQt5.QtWidgets import QFileDialog, QMessageBox
 from .UI.ui_main import Ui_MainWindow
 import DataHandler.Reader as FileReader
@@ -75,7 +76,20 @@ class MainWindowSlots(Ui_MainWindow):
             QMessageBox.about(None, "Saving neural network", "Done!")
 
     def load_network(self):
-        pass
+        fileName = self.__openFileNameDialog("Network config file (*.json)")
+
+        if fileName:
+            with open(fileName, 'r') as file_in:
+                file_text = file_in.read()
+                json_obj = json.loads(file_text)
+                json_obj['w'] = np.matrix(json_obj['w'])
+                json_obj['mu'] = np.array(json_obj['mu'])
+                json_obj['W'] = np.array(json_obj['W'])
+
+                self.network = nn.NeuralNetwork()
+                self.network.__dict__ = json_obj
+
+            QMessageBox.about(None, "Loading neural network", "Done!")
 
     def test_network(self):
         n_el = self.neuron_l1_count_inputs_spinbox.value()
