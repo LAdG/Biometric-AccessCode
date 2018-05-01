@@ -4,9 +4,6 @@ Module for generation input data
 
 import random
 
-K1_LEN = 320
-K2_LEN = 256
-
 def generate_key(possible_values, key_len):
     """Generate key
 
