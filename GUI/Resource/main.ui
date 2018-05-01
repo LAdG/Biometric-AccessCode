@@ -243,6 +243,13 @@
           </widget>
          </item>
          <item>
+          <widget class="QPushButton" name="network_export_btn">
+           <property name="text">
+            <string>Export</string>
+           </property>
+          </widget>
+         </item>
+         <item>
           <widget class="QPushButton" name="network_load_btn">
            <property name="text">
             <string>Load</string>
