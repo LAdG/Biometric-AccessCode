@@ -2,6 +2,8 @@
 Module neuron of layer 1 and 2
 """
 
+from math import exp
+
 def __activate1(x):
     f = 2 / (1 + exp(x)) - 1
 
