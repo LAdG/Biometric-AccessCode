@@ -37,7 +37,7 @@ class NeuralNetwork():
         # count electrodes
         self.I = h
         # count components
-        self.J = None
+        self.J = components
 
         # count neurons in layer 1
         self.n1 = n1
@@ -86,7 +86,7 @@ class NeuralNetwork():
     def __calculate_math_expects(self, forms):
         n = len(forms)
 
-        math_expects = np.zeros(self.I, self.J)
+        math_expects = np.zeros((self.I, self.J))
 
         for i in range(self.I):
             for j in range(self.J):
@@ -99,18 +99,18 @@ class NeuralNetwork():
     def __calculate_standart_deviations(self, forms, math_expects):
         n = len(forms)
 
-        standart_deviations = np.zeros(self.I, self.J)
+        standart_deviations = np.zeros((self.I, self.J))
 
         for i in range(self.I):
             for j in range(self.J):
                 for form in forms:
-                    standart_deviations[i][j] += (forms[i][j] - math_expects[i][j]) ** 2
+                    standart_deviations[i][j] += (form[i][j] - math_expects[i][j]) ** 2
                 standart_deviations[i][j] = np.sqrt(standart_deviations[i][j]) / (n - 1)
 
         return standart_deviations
 
     def __calculate_weights1(self, Mmain, Madv, Varmain, Varadv):
-        w = np.zeros(self.I, self.J)
+        w = np.zeros((self.I, self.J))
 
         for i in range(self.I):
             for j in range(self.J):
@@ -140,50 +140,43 @@ class NeuralNetwork():
         return mu
 
     def __calculate_weights2(self, in2, k1, k2):
-        b = [0] * len(k1)
+        b = [0] * len(k2)
         c = [0] * len(k1)
-        A = np.multiply(in2, k1)
+
+        A = np.multiply(k1, in2)
 
         for i in range(len(k2)):
             if k2[i] > 0:
                 A[i] *= -1
                 b[i] = -1
 
-        return linprog(c, A_ub=A, b_ub=b).x
+        res = linprog(c, A_ub=A, b_ub=b)
+        print(c, A, b)
+        
+        return res.x
     
-    def __generate_in(self, num_rows, num_cols, vals):
-        while(True):
-            in2 = [[0 for j in range(num_cols)] for i in range(num_rows)]
-            freeInRows = [[j for j in range(vals)] for i in range(num_rows)]
-            freeInCols = [[j for j in range(vals)] for i in range(num_cols)]
+    def __generate_in(self, num_rows, num_cols, vals, replace = False):
+        gen_in = []
 
-            isGood = True
-            for i in range(num_rows):
-                for j in range(num_cols):
-                    frows = freeInRows[i]
-                    fcols = freeInCols[j]
-                    frees = set(frows) & set(fcols)
+        for i in range(num_rows):
+            while True:
+                gen_row = np.random.choice(vals, num_cols, replace=replace)
 
-                    if len(frees) == 0:
+                isGood = True
+                for i in range(len(gen_in)):
+                    if np.array_equal(gen_in[i], gen_row):
                         isGood = False
                         break
 
-                    gen = list(frees)[np.random.randint(len(frees))]
-                    in2[i][j] = gen
-
-                    freeInRows[i].remove(gen)
-                    freeInCols[j].remove(gen)
-
-                if not isGood:
+                if isGood:
+                    gen_in.append(gen_row)
                     break
 
-            if isGood:
-                return in2
-                break
+        return gen_in
 
     def __generate_in1(self):
         while(True):
-            in1 = self.__generate_in(self.n1, self.h, self.I)
+            in1 = self.__generate_in(self.n1, self.h, self.h)
             
             isGood = True
             
@@ -199,7 +192,7 @@ class NeuralNetwork():
                 return in1
 
     def __generate_in2(self):
-        return self.__generate_in(self.n2, self.g, self.n1)
+        return self.__generate_in(self.n2, self.g, 2, True)
 
     def __get_res_layer1(self, m, in1):
         v = [0] * self.h
@@ -208,7 +201,7 @@ class NeuralNetwork():
             for j in range(self.J):
                 v[i] += m[i][j] * self.w[i][j]
 
-            v[i] += mu[i]
+            v[i] += self.mu[i]
 
         return [Neuron.neuron1_calc(v, in1[i]) for i in range(self.n1)]
 
