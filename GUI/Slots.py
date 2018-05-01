@@ -1,3 +1,4 @@
+import json
 from PyQt5.QtWidgets import QFileDialog, QMessageBox
 from .UI.ui_main import Ui_MainWindow
 import DataHandler.Reader as FileReader
@@ -55,7 +56,26 @@ class MainWindowSlots(Ui_MainWindow):
         self.network = nn.NeuralNetwork(h=count_inputs_n1, g=count_inputs_n2, 
             components=count_component_input_n1, n1=count_neurons1, n2=count_neurons2)
 
+        self.network.learn(self.k1, self.k2, self.ours, self.aliens)
+
         QMessageBox.about(None, "Learn neural network", "Done!")
+
+    def export_network(self):
+        fileName = self.__saveFileDialog("Network config file (*.json)")
+
+        if fileName:
+            with open(fileName, 'w') as file_out:
+                dict_vals = self.network.__dict__
+                dict_vals['w'] = dict_vals['w'].tolist()
+                dict_vals['mu'] = dict_vals['mu'].tolist()
+                # dict_vals['W'] = dict_vals['W'].tolist()
+                json_obj = json.dumps(dict_vals, indent=4)
+                print(json_obj, file=file_out)
+
+            QMessageBox.about(None, "Saving neural network", "Done!")
+
+    def load_network(self):
+        pass
 
     def test_network(self):
         n_el = self.neuron_l1_count_inputs_spinbox.value()
@@ -94,3 +114,11 @@ class MainWindowSlots(Ui_MainWindow):
             "QFileDialog.getOpenFileNames()", "", file_types, options=options)
 
         return files
+
+    def __saveFileDialog(self, file_types):    
+        options = QFileDialog.Options()
+        options |= QFileDialog.DontUseNativeDialog
+        fileName, _ = QFileDialog.getSaveFileName(None,
+            "QFileDialog.getSaveFileName()","",file_types, options=options)
+        
+        return fileName

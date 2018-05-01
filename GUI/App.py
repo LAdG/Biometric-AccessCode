@@ -25,7 +25,7 @@ class MainWindow(MainWindowSlots):
 
         self.neuron_l1_count_inputs_spinbox.setValue(14)
         self.neuron_l1_count_input_components_spinbox.setValue(15)
-        self.neuron_l2_count_inputs_spinbox.setValue(256)
+        self.neuron_l2_count_inputs_spinbox.setValue(320)
 
     def connect_slots(self):
         self.k1_load_btn.clicked.connect(self.k1_load)
@@ -35,5 +35,8 @@ class MainWindow(MainWindowSlots):
         self.ours_load_btn.clicked.connect(self.ours_load)
         self.aliens_load_btn.clicked.connect(self.aliens_load)
         self.learn_btn.clicked.connect(self.learn_network)
+
+        self.network_export_btn.clicked.connect(self.export_network)
+        self.network_load_btn.clicked.connect(self.load_network)
 
         self.testdata_load_btn.clicked.connect(self.test_network)
