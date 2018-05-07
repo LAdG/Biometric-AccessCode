@@ -150,8 +150,7 @@ class NeuralNetwork():
                 A[i] *= -1
                 b[i] = -1
 
-        res = linprog(c, A_ub=A, b_ub=b)
-        print(c, A, b)
+        res = linprog(c, A_ub=A, b_ub=b, method='interior-point')
         
         return res.x
     
