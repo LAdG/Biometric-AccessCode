@@ -82,7 +82,6 @@ class MainWindowSlots(Ui_MainWindow):
             with open(fileName, 'r') as file_in:
                 file_text = file_in.read()
                 json_obj = json.loads(file_text)
-                json_obj['w'] = np.matrix(json_obj['w'])
                 json_obj['mu'] = np.array(json_obj['mu'])
                 json_obj['W'] = np.array(json_obj['W'])
 
@@ -99,8 +98,9 @@ class MainWindowSlots(Ui_MainWindow):
 
         res_key = self.network.get_key(form)
         diff = 0
+
         for i in range(len(res_key)):
-            diff += 1 if res_key[i] != self.k2 else 0
+            diff += 1 if res_key[i] != self.k2[i] else 0
 
         QMessageBox.about(None, "Test neural network", "Done! Diff: " + str(diff))
 
