@@ -70,6 +70,8 @@ class MainWindowSlots(Ui_MainWindow):
                 dict_vals['w'] = dict_vals['w'].tolist()
                 dict_vals['mu'] = dict_vals['mu'].tolist()
                 dict_vals['W'] = dict_vals['W'].tolist()
+                dict_vals['signs_w'] = [sig.tolist() for sig in dict_vals['signs_w']]
+                
                 json_obj = json.dumps(dict_vals, indent=4)
                 print(json_obj, file=file_out)
 
