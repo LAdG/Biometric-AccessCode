@@ -25,6 +25,7 @@ class NeuralNetwork():
         """
 
         self.w = w
+        self.signs_w = []
         self.mu = mu
         self.W = W
         self.main_channels = main_channels
@@ -67,6 +68,7 @@ class NeuralNetwork():
         Varadv = self.__calculate_standart_deviations(aliens, Madv)
 
         self.w = self.__calculate_weights1(Mmain, Madv, Varmain, Varadv)
+        self.signs_w = self.__calculate_signs_weights1(Mmain, Madv, k1)
         self.mu = self.__calculate_mu(Mmain, self.w, k1)
 
         in2 = self.__generate_in2()
@@ -116,9 +118,21 @@ class NeuralNetwork():
             for j in range(self.J):
                 w[i][j] = np.fabs(Mmain[i][j] - Madv[i][j]) / (Varmain[i][j] * Varadv[i][j])
 
-        # TODO sign
-
         return w
+
+    def __calculate_signs_weights1(self, Mmain, Madv, k1):
+        signs_w = [[] for i in range(self.n1)]
+        
+        for l in range(self.n1):
+            signs_w[l] = np.zeros((self.I, self.J))
+            for i in range(self.I):
+                for j in range(self.J):
+                    signs_w[l][i][j] = np.sign(Mmain[i][j] - Madv[i][j])
+
+                    if k1[l] == -1:
+                        signs_w[l][i][j] *= -1
+
+        return signs_w
 
     def __calculate_mu(self, Mmain, w, k1):
         v = np.zeros(self.I)
@@ -199,13 +213,17 @@ class NeuralNetwork():
         return self.__generate_in(self.n2, self.g, 2, True)
 
     def __get_res_layer1(self, m, in1):
-        v = [0] * self.h
+        out1 = np.zeros(self.n1)
 
-        for i in range(self.h):
-            for j in range(self.J):
-                v[i] += m[i][j] * self.w[i][j]
+        for l in range(self.n1):
+            v = [0] * self.h
+            for i in range(self.h):
+                for j in range(self.J):
+                    v[i] += m[i][j] * self.w[i][j] * self.signs_w[l][i][j]
 
-        return [Neuron.neuron1_calc(v, self.mu[i], in1[i]) for i in range(self.n1)]
+            out1[l] = Neuron.neuron1_calc(v, self.mu[i], in1[i])
+
+        return out1
 
     def __get_res_layer2(self, out1, in2):
         return [Neuron.neuron2_calc(self.W, out1, in2[i]) for i in range(self.n2)]
