@@ -114,14 +114,17 @@ class NeuralNetwork():
 
         for i in range(self.I):
             for j in range(self.J):
-                Q = np.fabs(Mmain[i][j] - Madv[i][j]) / Varmain[i][j]
-                w[i][j] = Q / Varadv[i][j]
+                w[i][j] = np.fabs(Mmain[i][j] - Madv[i][j]) / (Varmain[i][j] * Varadv[i][j])
+
+        # TODO sign
 
         return w
 
     def __calculate_mu(self, Mmain, w, k1):
         v = np.zeros(self.I)
         mu = np.zeros(self.n1)
+
+        # TODO change this function!
 
         for i in range(self.I):
             for j in range(self.J):
@@ -151,6 +154,8 @@ class NeuralNetwork():
                 b[i] = -1
 
         res = linprog(c, A_ub=A, b_ub=b, method='interior-point')
+
+        # TODO sign?
         
         return res.x
     
@@ -200,9 +205,7 @@ class NeuralNetwork():
             for j in range(self.J):
                 v[i] += m[i][j] * self.w[i][j]
 
-            v[i] += self.mu[i]
-
-        return [Neuron.neuron1_calc(v, in1[i]) for i in range(self.n1)]
+        return [Neuron.neuron1_calc(v, self.mu[i], in1[i]) for i in range(self.n1)]
 
     def __get_res_layer2(self, out1, in2):
         return [Neuron.neuron2_calc(self.W, out1, in2[i]) for i in range(self.n2)]
