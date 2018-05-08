@@ -3,6 +3,7 @@ import numpy as np
 from PyQt5.QtWidgets import QFileDialog, QMessageBox
 from .UI.ui_main import Ui_MainWindow
 import DataHandler.Reader as FileReader
+import DataHandler.Writer as FileWriter
 import DataHandler.Generator as Generator
 import Network.NeuralNetwork as nn
 
@@ -34,6 +35,11 @@ class MainWindowSlots(Ui_MainWindow):
     def k2_gen(self):
         self.k2 = Generator.generate_k2(256)
         self.k2_status_label.setText('+')
+
+    def k2_save(self):
+        fileName = self.__saveFileDialog("k2 txt file (*.txt)")
+        FileWriter.write_list_to_file(self.k2, fileName)
+        QMessageBox.about(None, "Saving k2", "Done!")
 
     def ours_load(self):
         self.ours_paths = self.__openFileNamesDialog("Ours files (*.txt)")
@@ -71,7 +77,7 @@ class MainWindowSlots(Ui_MainWindow):
                 dict_vals['mu'] = dict_vals['mu'].tolist()
                 dict_vals['W'] = dict_vals['W'].tolist()
                 dict_vals['signs_w'] = [sig.tolist() for sig in dict_vals['signs_w']]
-                
+
                 json_obj = json.dumps(dict_vals, indent=4)
                 print(json_obj, file=file_out)
 
