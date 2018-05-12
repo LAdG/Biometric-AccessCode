@@ -69,7 +69,8 @@ class NeuralNetwork():
 
         self.w = self.__calculate_weights1(Mmain, Madv, Varmain, Varadv)
         self.signs_w = self.__calculate_signs_weights1(Mmain, Madv, k1)
-        self.mu = self.__calculate_mu(Mmain, self.w, k1)
+        in1 = self.__generate_in1()
+        self.mu = self.__calculate_mu(Mmain, self.w, k1, in1)
 
         in2 = self.__generate_in2()
         self.W = self.__calculate_weights2(in2, k1, k2)
@@ -134,25 +135,48 @@ class NeuralNetwork():
 
         return signs_w
 
-    def __calculate_mu(self, Mmain, w, k1):
+    def __calculate_mu(self, Mmain, w, k1, in1):
         v = np.zeros(self.I)
         mu = np.zeros(self.n1)
 
         # TODO change this function!
 
+        # for i in range(self.I):
+        #     for j in range(self.J):
+        #         v[i] += Mmain[i][j] * w[i][j]
+
+        #     for r in range(self.n1):
+        #         if v[i] < 0 and k1[r] == 1:
+        #             mu[i] = np.fabs(np.amin(v[i]))
+        #         elif v[i] < 0 and k1[r] == -1:
+        #             mu[i] = np.fabs(np.amax(v[i]))
+        #         elif v[i] >= 0 and k1[r] == 1:
+        #             mu[i] = -np.fabs(np.amin(v[i]))
+        #         elif v[i] >= 0 and k1[r] == -1:
+        #             mu[i] = -np.fabs(np.amax(v[i]))
+
+        x = np.zeros(self.n1)
+
         for i in range(self.I):
             for j in range(self.J):
                 v[i] += Mmain[i][j] * w[i][j]
 
-            for r in range(self.n1):
-                if v[i] < 0 and k1[r] == 1:
-                    mu[i] = np.fabs(np.amin(v[i]))
-                elif v[i] < 0 and k1[r] == -1:
-                    mu[i] = np.fabs(np.amax(v[i]))
-                elif v[i] >= 0 and k1[r] == 1:
-                    mu[i] = -np.fabs(np.amin(v[i]))
-                elif v[i] >= 0 and k1[r] == -1:
-                    mu[i] = -np.fabs(np.amax(v[i]))
+        for i in range(self.n1):
+            for j in range(self.h):
+                x[i] += v[in1[i][j]]
+
+        minv = np.fabs(np.amin(v))
+        maxv = np.fabs(np.amax(v))
+
+        for i in range(self.n1):
+            if x[i] < 0 and k1[i] == 1:
+                mu[i] =  minv
+            elif x[i] < 0 and k1[i] == -1:
+                mu[i] = maxv
+            elif x[i] >= 0 and k1[i] == 1:
+                mu[i] = -minv
+            elif x[i] >= 0 and k1[i] == -1:
+                mu[i] = -maxv
 
         return mu
 
