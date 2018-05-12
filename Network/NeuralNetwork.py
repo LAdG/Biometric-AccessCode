@@ -139,22 +139,6 @@ class NeuralNetwork():
         v = np.zeros(self.I)
         mu = np.zeros(self.n1)
 
-        # TODO change this function!
-
-        # for i in range(self.I):
-        #     for j in range(self.J):
-        #         v[i] += Mmain[i][j] * w[i][j]
-
-        #     for r in range(self.n1):
-        #         if v[i] < 0 and k1[r] == 1:
-        #             mu[i] = np.fabs(np.amin(v[i]))
-        #         elif v[i] < 0 and k1[r] == -1:
-        #             mu[i] = np.fabs(np.amax(v[i]))
-        #         elif v[i] >= 0 and k1[r] == 1:
-        #             mu[i] = -np.fabs(np.amin(v[i]))
-        #         elif v[i] >= 0 and k1[r] == -1:
-        #             mu[i] = -np.fabs(np.amax(v[i]))
-
         x = np.zeros(self.n1)
 
         for i in range(self.I):
