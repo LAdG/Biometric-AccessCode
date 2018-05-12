@@ -25,7 +25,7 @@ class MainWindowSlots(Ui_MainWindow):
         self.k1_status_label.setText('+')
 
     def k1_gen(self):
-        self.k1 = Generator.generate_k1(320)
+        self.k1 = Generator.generate_k1(self.count_neurons_l1_spinbox.value())
         self.k1_status_label.setText('+')
 
     def k2_load(self):
@@ -33,7 +33,7 @@ class MainWindowSlots(Ui_MainWindow):
         self.k2_status_label.setText('+')
 
     def k2_gen(self):
-        self.k2 = Generator.generate_k2(256)
+        self.k2 = Generator.generate_k2(self.count_neurons_l2_spinbox.value())
         self.k2_status_label.setText('+')
 
     def k2_save(self):
