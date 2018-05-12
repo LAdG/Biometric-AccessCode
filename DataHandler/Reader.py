@@ -3,13 +3,18 @@ Module for reading input files
 """
 
 import re
+import os
 
 def read_matrix_files(files_path, n_el, m_com):
     """Read files and convert to list of float matrixes
-    
     """
 
-    return [read_matrix_file(f_path, n_el, m_com) for f_path in files_path]
+    out = []
+    for f_path in files_path:
+        if os.stat(f_path).st_size != 0:
+            out.append(read_matrix_file(f_path, n_el, m_com))
+
+    return out
 
 def read_matrix_file(file_path, n_el, m_com):
     """Read file and convert to float matrix[n, m]
@@ -24,6 +29,7 @@ def read_matrix_file(file_path, n_el, m_com):
     """
 
     with open(file_path, 'r') as fin:
+        print(file_path)
         data = list(map(float, re.split('[ \n\t]+', fin.read().strip())))
         return list_to_matrix(data, n_el, m_com)
 
