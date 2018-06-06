@@ -9,7 +9,7 @@ import Network.Neuron as Neuron
 
 class NeuralNetwork():
     def __init__(self, w = None, mu = None, W = None, main_channels = [6, 7, 8, 9], h = 14, g = 256,
-                 components = 15, n1 = 320, n2 = 256):
+                 components = 15, n1 = 320, n2 = 256, in1 = [], in2 = []):
         """Initialize neural network
 
         :param w1: Matrix of weights layer 1
@@ -45,6 +45,9 @@ class NeuralNetwork():
         # count neurons in layer 2
         self.n2 = n2
 
+        self.in1 = in1
+        self.in2 = in2
+
     # public
 
     def learn(self, k1, k2, ours, aliens):
@@ -69,18 +72,15 @@ class NeuralNetwork():
 
         self.w = self.__calculate_weights1(Mmain, Madv, Varmain, Varadv)
         self.signs_w = self.__calculate_signs_weights1(Mmain, Madv, k1)
-        in1 = self.__generate_in1()
-        self.mu = self.__calculate_mu(Mmain, self.w, k1, in1)
+        self.in1 = self.__generate_in1()
+        self.mu = self.__calculate_mu(Mmain, self.w, k1, self.in1)
 
-        in2 = self.__generate_in2()
-        self.W = self.__calculate_weights2(in2, k1, k2)
+        self.in2 = self.__generate_in2()
+        self.W = self.__calculate_weights2(self.in2, k1, k2)
     
     def get_key(self, form):
-        in1 = self.__generate_in1()
-        in2 = self.__generate_in2()
-
-        out1 = self.__get_res_layer1(form, in1)
-        out2 = self.__get_res_layer2(out1, in2)
+        out1 = self.__get_res_layer1(form, self.in1)
+        out2 = self.__get_res_layer2(out1, self.in2)
 
         return out2
 
